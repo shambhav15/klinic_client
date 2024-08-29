@@ -1,6 +1,9 @@
+"use client"
+import LoginForm from "@/components/form/LoginForm";
 import RegisterForm from "@/components/form/RegisterForm";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const Home = () => {
 
@@ -19,26 +22,25 @@ const Home = () => {
             <p className="text-white text-3xl font-semibold">Klinic</p>
           </div>
           <RegisterForm />
-
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-dark-600 xl:text-left">
-              © 2024 CarePluse
+              © 2024 Klinic
             </p>
             <Link href="/?admin=true" className="text-green-500">
               Admin
             </Link>
           </div>
         </div>
-      </section>
+      </section >
 
       <Image
         src="/assets/images/register-img.png"
         height={1000}
         width={1000}
         alt="patient"
-        className="side-img max-w-[50%]"
+        className="hidden h-full object-cover lg:block max-w-[50%]"
       />
-    </div>
+    </div >
   );
 };
 
