@@ -7,8 +7,10 @@ import { Input } from './ui/input'
 import { FormFieldsType } from './form/RegisterForm'
 import { Phone } from 'lucide-react'
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from './ui/input-otp'
-
-
+import { Select, SelectContent, SelectTrigger, SelectValue } from './ui/select'
+import { Textarea } from './ui/textarea'
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 type CustomProps = {
     control: Control<any>,
     fieldType: FormFieldsType,
@@ -28,7 +30,8 @@ const RenderField = ({ field, props }: { field: any, props: CustomProps }) => {
 
     const { iconAlt, iconSrc, placeholder } = props
 
-
+    // console.log("field", field);
+    
     switch (props.fieldType) {
         case FormFieldsType.INPUT:
             return (
@@ -76,6 +79,7 @@ const RenderField = ({ field, props }: { field: any, props: CustomProps }) => {
                 </FormControl>
             )
             break;
+
         case FormFieldsType.OTP:
             return (
                 <div>
@@ -94,6 +98,62 @@ const RenderField = ({ field, props }: { field: any, props: CustomProps }) => {
                     </InputOTP>
                 </div>
             )
+            break;
+
+        case FormFieldsType.SELECT:
+            return (
+                <FormControl>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger className=" placeholder:text-stone-600 border-stone-800 h-11 focus:ring-0 focus:ring-offset-0">
+                                <SelectValue placeholder={props.placeholder} />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="border-stone-800">
+                            {props.children}
+                        </SelectContent>
+                    </Select>
+                </FormControl>
+            );
+        case FormFieldsType.DATE_PICKER:
+            return (
+                <div className="flex rounded-md border border-stone-800 ">
+                    <Image
+                        src="/assets/icons/calendar.svg"
+                        height={24}
+                        width={24}
+                        alt="user"
+                        className="ml-2"
+                    />
+                    <FormControl>
+                        <ReactDatePicker
+                            className='overflow-hidden border-transparent w-full placeholder:text-stone-800  h-11 text-14-medium rounded-md px-3 outline-none flex itmece'
+                            showTimeSelect={props.showTimeSelect ?? false}
+                            selected={field.value}
+                            onChange={(date: Date | null) => field.onChange(date)}
+                            timeInputLabel="Time:"
+                            dateFormat={props.dateFormat ?? "MM/dd/yyyy"}
+                            wrapperClassName=""
+                        />
+                    </FormControl>
+                </div>
+            );
+        case FormFieldsType.TEXTAREA:
+            return (
+                <div className='border-stone-800 sm:w-full md:w-1/2'>
+                    <FormControl>
+                        <Textarea
+                            rows={5}
+                            cols={1}
+                            placeholder={props.placeholder}
+                            {...field}
+                            className="placeholder:text-stone-600 focus-visible:ring-0  focus-visible:ring-offset-0 "
+                            disabled={props.disabled}
+                        />
+                    </FormControl>
+                </div>
+            );
+            break;
         default:
             break;
     }

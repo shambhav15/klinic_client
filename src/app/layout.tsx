@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import ThemeToggle from "@/components/ThemeToggle";
+import Provider from "@/lib/QueryClient";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,19 +29,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en">
-        <body
-          className={cn(
-            "min-h-screen bg-dark-300 font-sans antialiased",
-            fontSans.variable
-          )}
-        >
+    <html lang="en">
+      <body
+        className={cn(
+          "min-h-screen bg-dark-300 font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        <Provider>
           <ThemeProvider attribute="class" defaultTheme="dark">
             {children}
             <Toaster />
             <ThemeToggle />
           </ThemeProvider>
-        </body>
-      </html>
+        </Provider>
+      </body>
+    </html >
+
   );
 }

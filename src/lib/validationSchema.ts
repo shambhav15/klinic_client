@@ -21,3 +21,13 @@ export const otpFormValidation = z.object({
     .string()
     .refine((phone) => /^\d{10}$/.test(phone), "Invalid phone number"),
 });
+
+export const AppointmentFormValidation = z.object({
+  hospital: z.string().min(1),
+  doctor: z.string().min(1),
+  userId: z.string().min(1),
+  phone: z.string().min(1),
+  schedule: z.coerce.date(),
+  reason: z.string().min(1),
+  paid: z.boolean(),
+});
