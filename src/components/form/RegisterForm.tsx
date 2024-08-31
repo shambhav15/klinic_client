@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '../ui/form'
 import { useState } from 'react'
-import axios from "axios"
+import axios from "@/lib/axios"
 import CustomFormField from '../CustomFormField'
 import SubmitButton from '../SubmitButton'
 import { useRouter } from 'next/navigation'
@@ -35,10 +35,7 @@ const RegisterForm = () => {
     const onSubmit = async ({ name, phone }: z.infer<typeof RegisterFormValidation>) => {
         try {
             setIsLoading(true);
-            const response = await axios.post("http://localhost:8000/api/users/create", {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+            const response = await axios.post("/register", {
                 phone, name
             });
 
@@ -52,7 +49,6 @@ const RegisterForm = () => {
             }
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Registration failed. Please try again.";
-            // toast.error(errorMessage);
             setIsLoading(false);
         }
     }

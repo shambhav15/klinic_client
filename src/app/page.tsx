@@ -3,10 +3,7 @@ import LoginForm from "@/components/form/LoginForm";
 import RegisterForm from "@/components/form/RegisterForm";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-
 const Home = () => {
-
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar relative flex-1 overflow-y-auto px-[5%] my-auto">

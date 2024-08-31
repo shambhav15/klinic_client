@@ -8,14 +8,20 @@ export function middleware(request: NextRequest) {
     path.startsWith(route)
   );
 
-  const cookies = request.cookies.get("_klinic")?.value;
+  // Check if the authentication cookie exists
+  const isAuthenticated = request.cookies.has("token");
 
-  
-  if (isProtectedRoute && !cookies) {
+  // If it's a protected route and the cookie is missing, redirect to login
+  if (isProtectedRoute && !isAuthenticated) {
+    console.log("Redirecting to /login because the _klinic cookie is missing.");
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
+  // Continue to the requested page
+  return NextResponse.next();
 }
 
+// Apply this middleware to protected routes
 export const config = {
   matcher: ["/main", "/dashboard", "/appointment"],
 };
