@@ -31,7 +31,7 @@ type User = {
 
 // Define the Hospital type
 type Hospital = {
-  _id: string; 
+  _id: string;
   name: string;
   city: string;
   state: string;

@@ -1,11 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import axios from '@/lib/axios';
-
-interface User {
-  // Define your User interface here
-}
-
 interface UserStore {
     user: User | null;
     isLoading: boolean;
@@ -55,3 +50,4 @@ const useUserStore = create<UserStore>()(
 );
 
 export default useUserStore;
+
